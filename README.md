@@ -12,7 +12,7 @@ The app lets users chat with three separate Scaler / InterviewBit personality si
 
 ## Live Demo
 
-Live URL: _add after Vercel deployment_
+Live URL: https://scaler-persona-chatbot-pi.vercel.app
 
 ## Why this satisfies the assignment
 
@@ -126,7 +126,7 @@ eslint.config.mjs         # ESLint flat config for modern Next.js
 ## Submission checklist
 
 - [ ] Public GitHub repo link shared
-- [ ] Live deployed URL shared
+- [x] Live deployed URL shared
 - [x] README has setup instructions and live URL slot
 - [x] `.env.example` is present and sanitized
 - [x] Real API keys are gitignored

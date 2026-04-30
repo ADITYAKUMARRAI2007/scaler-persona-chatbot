@@ -27,3 +27,4 @@ private-research/
 
 # TypeScript incremental cache
 tsconfig.tsbuildinfo
+.vercel
