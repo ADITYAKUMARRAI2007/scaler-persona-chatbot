@@ -21,3 +21,9 @@ out/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# private assignment research inputs
+private-research/
+
+# TypeScript incremental cache
+tsconfig.tsbuildinfo

@@ -34,10 +34,12 @@ Live URL: _add after Vercel deployment_
 - Quick-start questions per persona
 - Isolated conversation state per persona switch
 - Server-side `/api/chat` route using Google Gemini via `@google/generative-ai`
+- Optional Supabase Auth login gate for deployed access control
 - Environment-variable-only API key handling
 - Request validation and capped chat history for safer API calls
 - Graceful quota/model/key error messages
 - Public-source research notes in `docs/` and `research/deep-style/`
+- Persona differentiation validation in `docs/persona-validation.md` with same-question test cases
 
 ## Tech stack
 
@@ -59,7 +61,14 @@ Add your Gemini API key in `.env.local`:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-2.5-flash-lite
+GEMINI_FALLBACK_MODELS=gemini-2.0-flash-lite,gemma-3-4b-it
+
+# Optional login/database via Supabase Auth
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 ```
+
+If the Supabase variables are absent, the app runs without login for local testing. If they are present, users must sign in before calling `/api/chat`.
 
 Run locally:
 
@@ -91,6 +100,9 @@ Recommended: Vercel.
 3. Add environment variables:
    - `GEMINI_API_KEY`
    - optional: `GEMINI_MODEL=gemini-2.5-flash-lite`
+   - optional: `GEMINI_FALLBACK_MODELS=gemini-2.0-flash-lite,gemma-3-4b-it`
+   - optional login/database: `NEXT_PUBLIC_SUPABASE_URL`
+   - optional login/database: `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 4. Deploy.
 5. Paste the deployed URL into the **Live Demo** section above.
 
@@ -100,11 +112,12 @@ Recommended: Vercel.
 app/
   api/chat/route.ts       # Server-side Gemini API call
   lib/personas.ts         # Three persona system prompts
+  lib/supabaseClient.ts   # Browser Supabase Auth client
   page.tsx                # Chat UI
   globals.css             # Responsive styling
 prompts.md                # Prompt documentation and annotated decisions
 reflection.md             # 300–500 word assignment reflection
-docs/                     # YouTube/public-source style analysis
+docs/                     # YouTube/public-source style analysis + persona validation
 research/deep-style/      # Deeper public-source synthesis and ledger
 .env.example              # Safe env template, no real key
 eslint.config.mjs         # ESLint flat config for modern Next.js
